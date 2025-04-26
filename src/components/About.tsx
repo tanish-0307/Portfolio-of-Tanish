@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { User, GraduationCap, Code, School } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -38,11 +37,11 @@ const About = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-2 text-center">About Me</h2>
           <div className="h-1 w-20 bg-primary mx-auto mb-12"></div>
           
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="flex justify-center items-center">
-              <Avatar className="w-64 h-64 border-4 border-primary/30">
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            <div className="flex flex-col items-center space-y-4">
+              <Avatar className="w-72 h-72 rounded-2xl border-4 border-primary/30 shadow-lg">
                 <AvatarImage 
-                  src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7" 
+                  src="/lovable-uploads/8923e4dd-cab6-4ad4-a6e8-deda18b26714.png"
                   alt="Tanish S Profile Picture" 
                   className="object-cover"
                 />
@@ -50,7 +49,7 @@ const About = () => {
               </Avatar>
             </div>
             
-            <div>
+            <div className="pt-4">
               <h3 className="text-2xl font-semibold mb-4">Student & Aspiring Engineer</h3>
               <p className="text-muted-foreground mb-6">
                 A passionate coder and electronics enthusiast with a strong background in robotics 
