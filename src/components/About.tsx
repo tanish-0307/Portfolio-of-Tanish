@@ -1,6 +1,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { User, GraduationCap, Code, School } from 'lucide-react';
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const About = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -38,13 +39,15 @@ const About = () => {
           <div className="h-1 w-20 bg-primary mx-auto mb-12"></div>
           
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="aspect-square relative rounded-2xl overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent"></div>
-              <img 
-                src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7" 
-                alt="Code on screen" 
-                className="object-cover w-full h-full"
-              />
+            <div className="flex justify-center items-center">
+              <Avatar className="w-64 h-64 border-4 border-primary/30">
+                <AvatarImage 
+                  src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7" 
+                  alt="Tanish S Profile Picture" 
+                  className="object-cover"
+                />
+                <AvatarFallback>TS</AvatarFallback>
+              </Avatar>
             </div>
             
             <div>
