@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import { User, Calendar, MapPin } from 'lucide-react';
+import { User, GraduationCap, Code, School } from 'lucide-react';
 
 const About = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -41,18 +41,18 @@ const About = () => {
             <div className="aspect-square relative rounded-2xl overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent"></div>
               <img 
-                src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=1000" 
-                alt="Developer at work" 
+                src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7" 
+                alt="Code on screen" 
                 className="object-cover w-full h-full"
               />
             </div>
             
             <div>
-              <h3 className="text-2xl font-semibold mb-4">Full-Stack Developer</h3>
+              <h3 className="text-2xl font-semibold mb-4">Student & Aspiring Engineer</h3>
               <p className="text-muted-foreground mb-6">
-                I'm a passionate developer with expertise in both frontend and backend technologies. 
-                I love creating intuitive user interfaces and powerful server-side applications that 
-                solve real-world problems.
+                A passionate coder and electronics enthusiast with a strong background in robotics 
+                and programming. Currently exploring the realms of ethical hacking and cybersecurity 
+                while pursuing my engineering degree.
               </p>
               
               <div className="space-y-4 mb-8">
@@ -62,27 +62,38 @@ const About = () => {
                   </div>
                   <div>
                     <h4 className="font-medium">Name</h4>
-                    <p className="text-muted-foreground">John Doe</p>
+                    <p className="text-muted-foreground">Tanish.S</p>
                   </div>
                 </div>
                 
                 <div className="flex items-center">
                   <div className="mr-4 p-2 rounded-full bg-primary/10 text-primary">
-                    <Calendar size={18} />
+                    <School size={18} />
                   </div>
                   <div>
-                    <h4 className="font-medium">Experience</h4>
-                    <p className="text-muted-foreground">5+ Years</p>
+                    <h4 className="font-medium">Education</h4>
+                    <p className="text-muted-foreground">B.E Electronics and Instrumentation</p>
+                    <p className="text-sm text-muted-foreground">SRM Valliammai Engineering College</p>
                   </div>
                 </div>
                 
                 <div className="flex items-center">
                   <div className="mr-4 p-2 rounded-full bg-primary/10 text-primary">
-                    <MapPin size={18} />
+                    <Code size={18} />
                   </div>
                   <div>
-                    <h4 className="font-medium">Location</h4>
-                    <p className="text-muted-foreground">San Francisco, CA</p>
+                    <h4 className="font-medium">Core Skills</h4>
+                    <p className="text-muted-foreground">Python, C++, HTML, CSS, Robotics</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center">
+                  <div className="mr-4 p-2 rounded-full bg-primary/10 text-primary">
+                    <GraduationCap size={18} />
+                  </div>
+                  <div>
+                    <h4 className="font-medium">Current Focus</h4>
+                    <p className="text-muted-foreground">Ethical Hacking & Cybersecurity</p>
                   </div>
                 </div>
               </div>
@@ -91,7 +102,7 @@ const About = () => {
                 href="#contact" 
                 className="inline-flex items-center px-6 py-3 rounded-full bg-primary text-white font-medium hover:bg-primary/90 transition-colors"
               >
-                Let's Talk
+                Get in Touch
               </a>
             </div>
           </div>
