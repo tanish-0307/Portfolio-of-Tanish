@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 
 interface Skill {
@@ -22,6 +23,8 @@ const skills: Skill[] = [
   { name: 'Ethical Hacking', level: 85, category: 'other' },
   { name: 'Cybersecurity', level: 85, category: 'other' },
   { name: 'Robotics', level: 80, category: 'other' },
+  { name: 'Photography', level: 90, category: 'other' },
+  { name: 'Video Editing', level: 85, category: 'other' },
   
   // Languages
   { name: 'English', level: 95, category: 'languages' },
@@ -54,7 +57,9 @@ const Skills = () => {
               if (progressBar) {
                 setTimeout(() => {
                   const skill = skills[index];
-                  progressBar.setAttribute('style', `width: ${skill.level}%`);
+                  if (skill.category !== 'languages') {
+                    progressBar.setAttribute('style', `width: ${skill.level}%; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1)`);
+                  }
                 }, 100 * index);
               }
             }
@@ -97,7 +102,7 @@ const Skills = () => {
       <div className="container mx-auto px-4">
         <div 
           ref={sectionRef}
-          className="max-w-5xl mx-auto mb-12 opacity-0 translate-y-10 transition-all duration-1000 ease-out"
+          className="max-w-5xl mx-auto opacity-0 translate-y-10 transition-all duration-1000 ease-out"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-2 text-center">Skills & Expertise</h2>
           <div className="h-1 w-20 bg-primary mx-auto mb-6"></div>
@@ -106,7 +111,7 @@ const Skills = () => {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 gap-12 mt-12">
           {(Object.keys(groupedSkills) as Array<keyof typeof Categories>).map((category) => (
             <div key={category} className="space-y-6">
               <h3 className="text-xl font-semibold mb-4">{Categories[category]}</h3>
@@ -122,14 +127,20 @@ const Skills = () => {
                   >
                     <div className="flex justify-between mb-1">
                       <span className="font-medium">{skill.name}</span>
-                      <span className="text-sm text-muted-foreground">{skill.level}%</span>
+                      {category !== 'languages' && (
+                        <span className="text-sm text-muted-foreground">{skill.level}%</span>
+                      )}
                     </div>
-                    <div className="h-2 bg-secondary rounded-full overflow-hidden">
-                      <div 
-                        className="progress-bar h-full bg-primary rounded-full transition-all duration-1000 ease-out"
-                        style={{ width: '0%' }}
-                      ></div>
-                    </div>
+                    {category !== 'languages' ? (
+                      <div className="h-2 bg-secondary rounded-full overflow-hidden">
+                        <div 
+                          className="progress-bar h-full bg-primary rounded-full transition-all duration-1000 ease-out"
+                          style={{ width: '0%' }}
+                        ></div>
+                      </div>
+                    ) : (
+                      <div className="text-sm text-muted-foreground italic">Proficient</div>
+                    )}
                   </div>
                 ))}
               </div>
