@@ -1,31 +1,39 @@
-
 import React, { useEffect, useRef } from 'react';
 
 interface Skill {
   name: string;
   level: number;
-  category: 'frontend' | 'backend' | 'other';
+  category: 'programming' | 'tools' | 'other' | 'languages';
 }
 
 const skills: Skill[] = [
-  { name: 'HTML & CSS', level: 95, category: 'frontend' },
-  { name: 'JavaScript', level: 90, category: 'frontend' },
-  { name: 'React', level: 85, category: 'frontend' },
-  { name: 'TypeScript', level: 80, category: 'frontend' },
-  { name: 'Tailwind CSS', level: 90, category: 'frontend' },
-  { name: 'Node.js', level: 85, category: 'backend' },
-  { name: 'Express', level: 80, category: 'backend' },
-  { name: 'MongoDB', level: 75, category: 'backend' },
-  { name: 'PostgreSQL', level: 70, category: 'backend' },
-  { name: 'GraphQL', level: 65, category: 'backend' },
-  { name: 'Git', level: 85, category: 'other' },
-  { name: 'Docker', level: 70, category: 'other' },
+  // Programming Languages
+  { name: 'Python', level: 90, category: 'programming' },
+  { name: 'C++', level: 85, category: 'programming' },
+  { name: 'Java', level: 70, category: 'programming' },
+  { name: 'HTML', level: 80, category: 'programming' },
+  
+  // Tools & Software
+  { name: 'Microsoft Word', level: 95, category: 'tools' },
+  { name: 'Microsoft Excel', level: 95, category: 'tools' },
+  { name: 'Microsoft PowerPoint', level: 95, category: 'tools' },
+  
+  // Other Skills
+  { name: 'Ethical Hacking', level: 85, category: 'other' },
+  { name: 'Cybersecurity', level: 85, category: 'other' },
+  { name: 'Robotics', level: 80, category: 'other' },
+  
+  // Languages
+  { name: 'English', level: 95, category: 'languages' },
+  { name: 'Tamil', level: 100, category: 'languages' },
+  { name: 'Hindi', level: 85, category: 'languages' },
 ];
 
 const Categories = {
-  frontend: 'Frontend Development',
-  backend: 'Backend Development',
-  other: 'Other Skills',
+  programming: 'Programming Languages',
+  tools: 'Tools & Software',
+  other: 'Technical Skills',
+  languages: 'Languages',
 };
 
 const Skills = () => {
