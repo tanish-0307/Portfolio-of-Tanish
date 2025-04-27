@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { ExternalLink, Github, Robot, Shield } from 'lucide-react';
+import { ExternalLink, Github, Bot, Shield } from 'lucide-react';
 
 interface Project {
   id: number;
@@ -20,7 +20,7 @@ const projects: Project[] = [
     image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1000",
     skills: ["Arduino", "C++", "Robotics", "Electronics", "Sensor Integration"],
     githubUrl: "https://github.com/tanish-0307/line-follower-robot",
-    icon: <Robot className="w-5 h-5" />
+    icon: <Bot className="w-5 h-5" />
   },
   {
     id: 2,
