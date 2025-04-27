@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { User, GraduationCap, Code, School } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -29,6 +30,13 @@ const About = () => {
 
   return (
     <section id="about" className="py-24 bg-secondary/30">
+      <div 
+        className="absolute top-0 left-0 w-full h-[300px] bg-cover bg-center bg-no-repeat opacity-20"
+        style={{ 
+          backgroundImage: 'url(https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1000)',
+          zIndex: -1 
+        }}
+      />
       <div className="container mx-auto px-4">
         <div 
           ref={sectionRef}
@@ -52,9 +60,9 @@ const About = () => {
             <div className="pt-4">
               <h3 className="text-2xl font-semibold mb-4">Student & Aspiring Engineer</h3>
               <p className="text-muted-foreground mb-6">
-                A passionate coder and electronics enthusiast with a strong background in robotics 
-                and programming. Currently exploring the realms of ethical hacking and cybersecurity 
-                while pursuing my engineering degree.
+                A passionate first-year engineering student with a strong interest in robotics
+                and cybersecurity. Currently exploring the realms of ethical hacking while building
+                a foundation in electronics and programming through hands-on projects.
               </p>
               
               <div className="space-y-4 mb-8">
@@ -73,8 +81,8 @@ const About = () => {
                     <School size={18} />
                   </div>
                   <div>
-                    <h4 className="font-medium">Education</h4>
-                    <p className="text-muted-foreground">B.E Electronics and Instrumentation</p>
+                    <h4 className="font-medium">Current Education</h4>
+                    <p className="text-muted-foreground">First Year - B.E Electronics and Instrumentation</p>
                     <p className="text-sm text-muted-foreground">SRM Valliammai Engineering College</p>
                   </div>
                 </div>

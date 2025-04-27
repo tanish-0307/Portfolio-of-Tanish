@@ -1,6 +1,5 @@
-
 import React, { useEffect, useRef } from 'react';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, Robot, Shield } from 'lucide-react';
 
 interface Project {
   id: number;
@@ -8,37 +7,29 @@ interface Project {
   description: string;
   image: string;
   skills: string[];
-  liveUrl: string;
+  liveUrl?: string;
   githubUrl: string;
+  icon: React.ReactNode;
 }
 
 const projects: Project[] = [
   {
     id: 1,
-    title: "E-commerce Platform",
-    description: "A modern e-commerce platform built with React, Node.js, and MongoDB with complete payment processing functionality.",
-    image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&q=80&w=1000",
-    skills: ["React", "Node.js", "MongoDB", "Stripe"],
-    liveUrl: "#",
-    githubUrl: "#"
+    title: "Line Follower Robot",
+    description: "Developed an autonomous line-following robot using infrared sensors and Arduino, capable of navigating predefined paths with precision control algorithms.",
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1000",
+    skills: ["Arduino", "C++", "Robotics", "Electronics", "Sensor Integration"],
+    githubUrl: "https://github.com/tanish-0307/line-follower-robot",
+    icon: <Robot className="w-5 h-5" />
   },
   {
     id: 2,
-    title: "Task Management App",
-    description: "A collaborative task management application with real-time updates and team collaboration features.",
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=1000",
-    skills: ["Vue.js", "Express", "Socket.io", "PostgreSQL"],
-    liveUrl: "#",
-    githubUrl: "#"
-  },
-  {
-    id: 3,
-    title: "AI Content Generator",
-    description: "An AI-powered content generation tool that helps create marketing copy, blog posts, and social media content.",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1000",
-    skills: ["React", "OpenAI API", "Python", "FastAPI"],
-    liveUrl: "#",
-    githubUrl: "#"
+    title: "Network Vulnerability Scanner",
+    description: "Created a basic network vulnerability assessment tool using Python, capable of identifying common security vulnerabilities and generating detailed reports.",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000",
+    skills: ["Python", "Network Security", "Penetration Testing", "Ethical Hacking"],
+    githubUrl: "https://github.com/tanish-0307/vulnerability-scanner",
+    icon: <Shield className="w-5 h-5" />
   }
 ];
 
@@ -87,11 +78,11 @@ const Projects = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-2 text-center">My Projects</h2>
           <div className="h-1 w-20 bg-primary mx-auto mb-6"></div>
           <p className="text-center text-muted-foreground max-w-2xl mx-auto">
-            Here are some of my most recent and exciting projects. Each project showcases different skills and technologies.
+            Here are some of my key projects in robotics and cybersecurity, showcasing my hands-on experience and technical skills.
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <div 
               key={project.id}
@@ -108,7 +99,10 @@ const Projects = () => {
               </div>
               
               <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                <div className="flex items-center gap-2 mb-2">
+                  {project.icon}
+                  <h3 className="text-xl font-semibold">{project.title}</h3>
+                </div>
                 <p className="text-muted-foreground mb-4">{project.description}</p>
                 
                 <div className="flex flex-wrap gap-2 mb-6">
@@ -123,15 +117,17 @@ const Projects = () => {
                 </div>
                 
                 <div className="flex space-x-3">
-                  <a 
-                    href={project.liveUrl} 
-                    className="inline-flex items-center text-sm font-medium text-primary hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <ExternalLink size={16} className="mr-1" />
-                    Live Demo
-                  </a>
+                  {project.liveUrl && (
+                    <a 
+                      href={project.liveUrl} 
+                      className="inline-flex items-center text-sm font-medium text-primary hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <ExternalLink size={16} className="mr-1" />
+                      Live Demo
+                    </a>
+                  )}
                   <a 
                     href={project.githubUrl}
                     className="inline-flex items-center text-sm font-medium text-foreground hover:text-primary hover:underline"
