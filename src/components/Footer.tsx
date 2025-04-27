@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const Footer = () => {
@@ -11,10 +10,10 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-6 md:mb-0">
               <a href="#" className="text-xl font-semibold">
-                Portfolio<span className="text-primary">.</span>
+                Tanish Portfolio
               </a>
               <p className="text-muted-foreground mt-2 text-sm max-w-xs">
-                Creating beautiful, functional web applications with attention to detail and user experience.
+                Exploring the intersection of ethical hacking and instrumentation engineering with innovation and security.
               </p>
             </div>
             
@@ -32,7 +31,7 @@ const Footer = () => {
           
           <div className="mt-8 pt-6 border-t border-border flex flex-col md:flex-row justify-between items-center">
             <div className="text-sm text-muted-foreground">
-              © {currentYear} Portfolio. All rights reserved.
+              © {currentYear} Tanish Portfolio. All rights reserved.
             </div>
             
             <div className="mt-4 md:mt-0">

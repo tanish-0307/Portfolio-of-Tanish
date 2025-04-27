@@ -55,7 +55,7 @@ const Header = () => {
     >
       <div className="container mx-auto flex items-center justify-between px-4">
         <a href="#" className="text-xl font-semibold tracking-tight">
-          Portfolio<span className="text-primary">.</span>
+          Tanish Portfolio
         </a>
 
         {/* Desktop Navigation */}

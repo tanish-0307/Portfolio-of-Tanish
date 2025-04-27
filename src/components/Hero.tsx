@@ -52,14 +52,14 @@ const Hero = () => {
             ref={textRef} 
             className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 reveal-text"
           >
-            Building Digital Experiences That Matter
+            Innovating Through Security & Technology
           </h1>
           
           <p 
             ref={subtitleRef} 
             className="text-lg md:text-xl text-muted-foreground mb-10 transition-all duration-1000 opacity-0 translate-y-4"
           >
-            Frontend & Backend Developer crafting beautiful, functional websites and applications
+            Ethical Hacking Enthusiast & Instrumentation Engineering Student
           </p>
           
           <div className="flex justify-center space-x-4 animate-fade-in" style={{ animationDelay: "1.5s" }}>
