@@ -23,7 +23,7 @@ const SocialLinks = () => {
       </a>
       
       <a 
-        href="https://www.instagram.com/_.txnxshx_?igsh=c285ajU2aW5oNGc3"
+        href="https://www.instagram.com/_.txnxsh.__?igsh=c285ajU2aW5oNGc3"
         target="_blank"
         rel="noopener noreferrer"
         className="p-3 rounded-full bg-secondary text-foreground hover:bg-primary hover:text-white transition-colors"
