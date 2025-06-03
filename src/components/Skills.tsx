@@ -1,5 +1,7 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 interface Skill {
   name: string;
@@ -39,55 +41,76 @@ const Categories = {
   languages: 'Languages',
 };
 
+const SkillBar = ({ skill, index }: { skill: Skill, index: number }) => {
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true
+  });
+
+  return (
+    <div 
+      ref={ref}
+      className="skill-bar opacity-0 translate-y-4 transition-all duration-700 ease-out"
+      style={{ 
+        opacity: inView ? 1 : 0, 
+        transform: inView ? 'translateY(0)' : 'translateY(4px)',
+        transitionDelay: `${index * 100}ms` 
+      }}
+    >
+      <div className="flex justify-between mb-1">
+        <span className="font-medium">{skill.name}</span>
+        {skill.category !== 'languages' && (
+          <span className="text-sm text-muted-foreground">{skill.level}%</span>
+        )}
+      </div>
+      
+      {skill.category !== 'languages' ? (
+        <div className="h-2 bg-black/5 dark:bg-white/5 rounded-full overflow-hidden backdrop-blur-sm">
+          <motion.div 
+            className="h-full bg-gradient-to-r from-primary to-primary/80 rounded-full"
+            initial={{ width: "0%" }}
+            animate={inView ? { width: `${skill.level}%` } : { width: "0%" }}
+            transition={{ duration: 1, ease: "easeOut", delay: index * 0.1 }}
+          />
+        </div>
+      ) : (
+        <div className="text-sm text-muted-foreground italic">Proficient</div>
+      )}
+    </div>
+  );
+};
+
+const CategoryCard = ({ title, children, delay }: { title: string, children: React.ReactNode, delay: number }) => {
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true
+  });
+
+  return (
+    <motion.div 
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.6, delay: delay * 0.2 }}
+      className="bg-white/5 backdrop-blur-md rounded-xl p-6 shadow-lg border border-white/10"
+    >
+      <h3 className="text-xl font-semibold mb-6 flex items-center">
+        <div className="w-2 h-6 bg-primary rounded-full mr-3"></div>
+        {title}
+      </h3>
+      <div className="space-y-5">
+        {children}
+      </div>
+    </motion.div>
+  );
+};
+
 const Skills = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const skillRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('opacity-100', 'translate-y-0');
-            
-            if (entry.target.classList.contains('skill-bar')) {
-              const index = parseInt(entry.target.getAttribute('data-index') || '0');
-              const progressBar = entry.target.querySelector('.progress-bar');
-              
-              if (progressBar) {
-                setTimeout(() => {
-                  const skill = skills[index];
-                  if (skill.category !== 'languages') {
-                    progressBar.setAttribute('style', `width: ${skill.level}%; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1)`);
-                  }
-                }, 100 * index);
-              }
-            }
-            
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    skillRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-      skillRefs.current.forEach((ref) => {
-        if (ref) observer.unobserve(ref);
-      });
-    };
-  }, []);
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true
+  });
 
   const groupedSkills = skills.reduce((acc, skill) => {
     if (!acc[skill.category]) {
@@ -98,53 +121,43 @@ const Skills = () => {
   }, {} as Record<string, Skill[]>);
 
   return (
-    <section id="skills" className="py-24 bg-secondary/30">
+    <section id="skills" className="py-24 relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(var(--primary),0.08)_0,rgba(255,255,255,0)_60%)]"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-secondary/30 to-transparent"></div>
+      </div>
+
       <div className="container mx-auto px-4">
-        <div 
-          ref={sectionRef}
-          className="max-w-5xl mx-auto opacity-0 translate-y-10 transition-all duration-1000 ease-out"
+        <motion.div 
+          ref={ref}
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-5xl mx-auto mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-2 text-center">Skills & Expertise</h2>
           <div className="h-1 w-20 bg-primary mx-auto mb-6"></div>
           <p className="text-center text-muted-foreground max-w-2xl mx-auto">
             My technical skills and proficiency levels across various technologies and tools.
           </p>
-        </div>
+        </motion.div>
         
-        <div className="grid md:grid-cols-2 gap-12 mt-12">
-          {(Object.keys(groupedSkills) as Array<keyof typeof Categories>).map((category) => (
-            <div key={category} className="space-y-6">
-              <h3 className="text-xl font-semibold mb-4">{Categories[category]}</h3>
-              
-              <div className="space-y-5">
-                {groupedSkills[category].map((skill, index) => (
-                  <div 
-                    key={skill.name}
-                    ref={el => skillRefs.current.push(el)}
-                    className="skill-bar opacity-0 translate-y-4 transition-all duration-700 ease-out"
-                    data-index={(Object.keys(groupedSkills) as Array<keyof typeof Categories>).indexOf(category) * 10 + index}
-                    style={{ transitionDelay: `${index * 100}ms` }}
-                  >
-                    <div className="flex justify-between mb-1">
-                      <span className="font-medium">{skill.name}</span>
-                      {category !== 'languages' && (
-                        <span className="text-sm text-muted-foreground">{skill.level}%</span>
-                      )}
-                    </div>
-                    {category !== 'languages' ? (
-                      <div className="h-2 bg-secondary rounded-full overflow-hidden">
-                        <div 
-                          className="progress-bar h-full bg-primary rounded-full transition-all duration-1000 ease-out"
-                          style={{ width: '0%' }}
-                        ></div>
-                      </div>
-                    ) : (
-                      <div className="text-sm text-muted-foreground italic">Proficient</div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
+        <div className="grid md:grid-cols-2 gap-8">
+          {(Object.keys(groupedSkills) as Array<keyof typeof Categories>).map((category, catIndex) => (
+            <CategoryCard 
+              key={category} 
+              title={Categories[category]} 
+              delay={catIndex}
+            >
+              {groupedSkills[category].map((skill, skillIndex) => (
+                <SkillBar 
+                  key={skill.name} 
+                  skill={skill} 
+                  index={skillIndex} 
+                />
+              ))}
+            </CategoryCard>
           ))}
         </div>
       </div>

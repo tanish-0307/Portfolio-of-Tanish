@@ -2,62 +2,61 @@
 import React, { useEffect, useRef } from 'react';
 import { User, GraduationCap, Code, School } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { AnimatedButton } from './ui/animated-button';
 
 const About = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('opacity-100', 'translate-y-0');
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true
+  });
 
   return (
-    <section id="about" className="py-24 bg-secondary/30">
-      <div 
-        className="absolute top-0 left-0 w-full h-[300px] bg-cover bg-center bg-no-repeat opacity-20"
-        style={{ 
-          backgroundImage: 'url(https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1000)',
-          zIndex: -1 
-        }}
-      />
+    <section id="about" className="py-24 relative overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(var(--primary),0.08)_0,rgba(255,255,255,0)_70%)]"></div>
+        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-secondary/20 to-transparent"></div>
+      </div>
+      
       <div className="container mx-auto px-4">
-        <div 
-          ref={sectionRef}
-          className="max-w-5xl mx-auto opacity-0 translate-y-10 transition-all duration-1000 ease-out"
+        <motion.div 
+          ref={ref}
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-5xl mx-auto"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-2 text-center">About Me</h2>
           <div className="h-1 w-20 bg-primary mx-auto mb-12"></div>
           
           <div className="grid md:grid-cols-2 gap-12 items-start">
-            <div className="flex flex-col items-center space-y-4">
-              <Avatar className="w-72 h-72 rounded-2xl border-4 border-primary/30 shadow-lg">
-                <AvatarImage 
-                  src="/lovable-uploads/8923e4dd-cab6-4ad4-a6e8-deda18b26714.png"
-                  alt="Tanish S Profile Picture" 
-                  className="object-cover"
-                />
-                <AvatarFallback>TS</AvatarFallback>
-              </Avatar>
-            </div>
+            <motion.div 
+              className="flex flex-col items-center space-y-4"
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={inView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <div className="relative w-72 h-72">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-primary/40 rounded-2xl blur-lg opacity-60 animate-pulse"></div>
+                <Avatar className="w-72 h-72 rounded-2xl border-4 border-white/10 shadow-lg overflow-hidden relative z-10">
+                  <AvatarImage 
+                    src="/lovable-uploads/8923e4dd-cab6-4ad4-a6e8-deda18b26714.png"
+                    alt="Tanish S Profile Picture" 
+                    className="object-cover"
+                  />
+                  <AvatarFallback>TS</AvatarFallback>
+                </Avatar>
+              </div>
+            </motion.div>
             
-            <div className="pt-4">
+            <motion.div 
+              className="pt-4"
+              initial={{ opacity: 0, x: 20 }}
+              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
               <h3 className="text-2xl font-semibold mb-4">Student & Aspiring Engineer</h3>
               <p className="text-muted-foreground mb-6">
                 A passionate first-year engineering student with a strong interest in robotics
@@ -66,59 +65,87 @@ const About = () => {
               </p>
               
               <div className="space-y-4 mb-8">
-                <div className="flex items-center">
-                  <div className="mr-4 p-2 rounded-full bg-primary/10 text-primary">
-                    <User size={18} />
-                  </div>
-                  <div>
-                    <h4 className="font-medium">Name</h4>
-                    <p className="text-muted-foreground">Tanish.S</p>
-                  </div>
-                </div>
+                <InfoItem 
+                  icon={<User size={18} />} 
+                  title="Name" 
+                  value="Tanish.S" 
+                  delay={0.5} 
+                  inView={inView} 
+                />
                 
-                <div className="flex items-center">
-                  <div className="mr-4 p-2 rounded-full bg-primary/10 text-primary">
-                    <School size={18} />
-                  </div>
-                  <div>
-                    <h4 className="font-medium">Current Education</h4>
-                    <p className="text-muted-foreground">First Year - B.E Electronics and Instrumentation</p>
-                    <p className="text-sm text-muted-foreground">SRM Valliammai Engineering College</p>
-                  </div>
-                </div>
+                <InfoItem 
+                  icon={<School size={18} />} 
+                  title="Current Education" 
+                  value="First Year - B.E Electronics and Instrumentation" 
+                  subvalue="SRM Valliammai Engineering College"
+                  delay={0.6} 
+                  inView={inView} 
+                />
                 
-                <div className="flex items-center">
-                  <div className="mr-4 p-2 rounded-full bg-primary/10 text-primary">
-                    <Code size={18} />
-                  </div>
-                  <div>
-                    <h4 className="font-medium">Core Skills</h4>
-                    <p className="text-muted-foreground">Python, C++, HTML, CSS, Robotics</p>
-                  </div>
-                </div>
+                <InfoItem 
+                  icon={<Code size={18} />} 
+                  title="Core Skills" 
+                  value="Python, C++, HTML, CSS, Robotics" 
+                  delay={0.7} 
+                  inView={inView} 
+                />
                 
-                <div className="flex items-center">
-                  <div className="mr-4 p-2 rounded-full bg-primary/10 text-primary">
-                    <GraduationCap size={18} />
-                  </div>
-                  <div>
-                    <h4 className="font-medium">Current Focus</h4>
-                    <p className="text-muted-foreground">Ethical Hacking & Cybersecurity</p>
-                  </div>
-                </div>
+                <InfoItem 
+                  icon={<GraduationCap size={18} />} 
+                  title="Current Focus" 
+                  value="Ethical Hacking & Cybersecurity" 
+                  delay={0.8} 
+                  inView={inView} 
+                />
               </div>
               
-              <a 
-                href="#contact" 
-                className="inline-flex items-center px-6 py-3 rounded-full bg-primary text-white font-medium hover:bg-primary/90 transition-colors"
+              <AnimatedButton 
+                variant="default" 
+                size="lg" 
+                rounded="full"
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Get in Touch
-              </a>
-            </div>
+              </AnimatedButton>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
+  );
+};
+
+const InfoItem = ({ 
+  icon, 
+  title, 
+  value, 
+  subvalue, 
+  delay, 
+  inView 
+}: { 
+  icon: React.ReactNode; 
+  title: string; 
+  value: string; 
+  subvalue?: string;
+  delay: number;
+  inView: boolean;
+}) => {
+  return (
+    <motion.div 
+      className="flex items-center"
+      initial={{ opacity: 0, y: 10 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+      transition={{ duration: 0.5, delay }}
+    >
+      <div className="mr-4 p-2 rounded-full bg-primary/10 text-primary">
+        {icon}
+      </div>
+      <div>
+        <h4 className="font-medium">{title}</h4>
+        <p className="text-muted-foreground">{value}</p>
+        {subvalue && <p className="text-sm text-muted-foreground">{subvalue}</p>}
+      </div>
+    </motion.div>
   );
 };
 

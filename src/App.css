@@ -4,14 +4,20 @@
   margin: 0;
   padding: 0;
   text-align: left;
+  overflow-x: hidden;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
+html, body {
+  overscroll-behavior: none;
+}
+
 section {
   scroll-margin-top: 80px;
+  position: relative;
 }
 
 .smooth-scroll {
@@ -43,8 +49,62 @@ section {
 .delay-400 { animation-delay: 0.4s; }
 .delay-500 { animation-delay: 0.5s; }
 
+/* Apple-inspired scroll experience */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* Apple-inspired focus styles */
+:focus {
+  outline: 2px solid rgba(var(--primary), 0.5);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.focus-ring {
+  position: relative;
+}
+
+.focus-ring:after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: calc(var(--radius) + 4px);
+  box-shadow: 0 0 0 2px rgba(var(--primary), 0.5);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.focus-ring:focus-within:after {
+  opacity: 1;
+}
+
+/* Reduce motion for accessibility */
 @media (prefers-reduced-motion) {
   .animate-none {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .animate-none * {
     animation: none !important;
     transition: none !important;
   }

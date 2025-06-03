@@ -1,30 +1,14 @@
 
 import React, { useEffect, useRef } from 'react';
 import { ArrowDown } from 'lucide-react';
+import HeroText3D from './HeroText3D';
+import { Button } from './ui/button';
 
 const Hero = () => {
-  const textRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
-    const textElement = textRef.current;
     const subtitleElement = subtitleRef.current;
-
-    if (textElement) {
-      const text = textElement.innerText;
-      textElement.innerHTML = '';
-      
-      text.split('').forEach((char, index) => {
-        const span = document.createElement('span');
-        span.innerText = char === ' ' ? '\u00A0' : char;
-        span.style.setProperty('--index', `${index}`);
-        textElement.appendChild(span);
-      });
-
-      setTimeout(() => {
-        textElement.classList.add('animated');
-      }, 100);
-    }
 
     if (subtitleElement) {
       setTimeout(() => {
@@ -48,12 +32,9 @@ const Hero = () => {
       
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 
-            ref={textRef} 
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 reveal-text"
-          >
-            Innovating Through Security & Technology
-          </h1>
+          <div className="mb-8 transform-gpu">
+            <HeroText3D />
+          </div>
           
           <p 
             ref={subtitleRef} 
@@ -63,19 +44,23 @@ const Hero = () => {
           </p>
           
           <div className="flex justify-center space-x-4 animate-fade-in" style={{ animationDelay: "1.5s" }}>
-            <a 
-              href="#projects" 
-              className="px-6 py-3 rounded-full bg-primary text-white font-medium hover:bg-primary/90 transition-colors"
+            <Button 
+              variant="default" 
+              size="lg" 
+              className="rounded-full bg-gradient-to-r from-primary to-primary/80 hover:shadow-[0_0_15px_rgba(var(--primary),0.5)] transition-all duration-300 transform hover:scale-105"
+              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
             >
               View My Work
-            </a>
+            </Button>
             
-            <a 
-              href="#contact" 
-              className="px-6 py-3 rounded-full bg-secondary text-foreground font-medium hover:bg-secondary/80 transition-colors"
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="rounded-full border-2 hover:border-primary hover:text-primary transition-all duration-300 transform hover:scale-105 backdrop-blur-sm"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Contact Me
-            </a>
+            </Button>
           </div>
         </div>
       </div>
@@ -86,7 +71,7 @@ const Hero = () => {
         aria-label="Scroll down"
       >
         <span className="mb-2 text-muted-foreground">Scroll</span>
-        <ArrowDown size={20} />
+        <ArrowDown size={20} className="animate-bounce" />
       </button>
     </section>
   );
