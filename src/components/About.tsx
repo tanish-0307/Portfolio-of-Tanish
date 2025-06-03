@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import { User, GraduationCap, Code, School } from 'lucide-react';
+import { User, GraduationCap, Code, School, Building2 } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -17,8 +17,48 @@ const About = () => {
       {/* Enhanced 3D Background effects */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.1)_0,transparent_70%)]"></div>
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <motion.div 
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"
+          animate={{ 
+            scale: [1, 1.2, 1],
+            rotate: [0, 180, 360],
+            x: [0, 50, 0],
+            y: [0, -30, 0]
+          }}
+          transition={{ 
+            duration: 15, 
+            repeat: Infinity, 
+            ease: "linear" 
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"
+          animate={{ 
+            scale: [1.1, 0.9, 1.1],
+            rotate: [360, 180, 0],
+            x: [0, -40, 0],
+            y: [0, 40, 0]
+          }}
+          transition={{ 
+            duration: 12, 
+            repeat: Infinity, 
+            ease: "linear" 
+          }}
+        />
+        <motion.div 
+          className="absolute top-1/2 left-1/2 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl"
+          animate={{ 
+            scale: [0.8, 1.3, 0.8],
+            rotate: [0, 360],
+            x: [-150, 150, -150],
+            y: [-100, 100, -100]
+          }}
+          transition={{ 
+            duration: 20, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent"></div>
       </div>
       
@@ -98,13 +138,26 @@ const About = () => {
                 transition={{ duration: 0.6, delay: 0.5 }}
               >
                 <h3 className="text-2xl font-semibold mb-4 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
-                  Student & Aspiring Engineer
+                  Student, Entrepreneur & Cybersecurity Enthusiast
                 </h3>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
-                  A passionate first-year engineering student with a strong interest in robotics
-                  and cybersecurity. Currently exploring the realms of ethical hacking while building
-                  a foundation in electronics and programming through hands-on projects.
+                  A passionate first-year engineering student and founder of CYBERDIOXIDE, a startup dedicated to making cybersecurity accessible to everyone. Currently exploring the realms of ethical hacking while building a foundation in electronics and programming through hands-on projects.
                 </p>
+                <motion.div 
+                  className="p-4 rounded-lg bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200/50 dark:border-blue-700/50"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.6, delay: 0.8 }}
+                  whileHover={{ scale: 1.02, boxShadow: "0 10px 30px rgba(59, 130, 246, 0.2)" }}
+                >
+                  <h4 className="font-semibold text-blue-600 dark:text-blue-400 mb-2 flex items-center">
+                    <Building2 size={18} className="mr-2" />
+                    CYBERDIOXIDE
+                  </h4>
+                  <p className="text-sm text-muted-foreground">
+                    "Cybersecurity for Everyone" - Our mission is to democratize cybersecurity knowledge and tools, making digital safety accessible to individuals and businesses of all sizes.
+                  </p>
+                </motion.div>
               </motion.div>
               
               <div className="space-y-4 mb-8">
@@ -122,6 +175,15 @@ const About = () => {
                   value="First Year - B.E Electronics and Instrumentation" 
                   subvalue="SRM Valliammai Engineering College"
                   delay={0.7} 
+                  inView={inView} 
+                />
+                
+                <InfoItem 
+                  icon={<Building2 size={18} />} 
+                  title="Startup" 
+                  value="Founder & CEO at CYBERDIOXIDE" 
+                  subvalue="Cybersecurity for Everyone"
+                  delay={0.75} 
                   inView={inView} 
                 />
                 

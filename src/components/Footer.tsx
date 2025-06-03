@@ -1,7 +1,15 @@
+
 import React from 'react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
   
   return (
     <footer className="bg-secondary/50 py-12">
@@ -35,13 +43,13 @@ const Footer = () => {
             </div>
             
             <div className="mt-4 md:mt-0">
-              <a 
-                href="#" 
-                className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm hover:bg-primary/20 transition-colors"
+              <button 
+                onClick={scrollToTop}
+                className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm hover:bg-primary/20 transition-colors cursor-pointer"
               >
                 <span className="mr-2">↑</span>
                 Back to Top
-              </a>
+              </button>
             </div>
           </div>
         </div>
