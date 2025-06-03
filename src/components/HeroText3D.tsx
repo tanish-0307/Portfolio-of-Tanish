@@ -75,7 +75,6 @@ const HeroText3D = () => {
           rotation={[0, 0, 0]}
           polar={[-Math.PI / 4, Math.PI / 4]}
           azimuth={[-Math.PI / 6, Math.PI / 6]}
-          config={{ mass: 2, tension: 400 }}
         >
           <Center>
             <TextMesh text="Tanish Portfolio" />
