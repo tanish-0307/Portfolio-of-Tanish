@@ -40,7 +40,7 @@ const TextMesh = ({ text }: { text: string }) => {
           metalness={0.8}
           roughness={0.2}
           envMapIntensity={1}
-          emissive={hovered ? "#0070F3" : "#000000"}
+          emissive={new THREE.Color(hovered ? "#0070F3" : "#000000")}
           emissiveIntensity={hovered ? 0.5 : 0}
         />
       </Text3D>
