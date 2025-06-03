@@ -14,10 +14,12 @@ const About = () => {
 
   return (
     <section id="about" className="py-24 relative overflow-hidden">
-      {/* Background effects */}
+      {/* Enhanced 3D Background effects */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(var(--primary),0.08)_0,rgba(255,255,255,0)_70%)]"></div>
-        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-secondary/20 to-transparent"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.1)_0,transparent_70%)]"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent"></div>
       </div>
       
       <div className="container mx-auto px-4">
@@ -28,19 +30,52 @@ const About = () => {
           transition={{ duration: 0.8 }}
           className="max-w-5xl mx-auto"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-2 text-center">About Me</h2>
-          <div className="h-1 w-20 bg-primary mx-auto mb-12"></div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-2">About Me</h2>
+            <motion.div 
+              className="h-1 w-20 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"
+              initial={{ width: 0 }}
+              animate={inView ? { width: 80 } : { width: 0 }}
+              transition={{ duration: 1, delay: 0.3 }}
+            />
+          </motion.div>
           
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <motion.div 
               className="flex flex-col items-center space-y-4"
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={inView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              initial={{ opacity: 0, scale: 0.8, rotateY: -20 }}
+              animate={inView ? { opacity: 1, scale: 1, rotateY: 0 } : { opacity: 0, scale: 0.8, rotateY: -20 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              style={{ transformStyle: 'preserve-3d' }}
             >
-              <div className="relative w-72 h-72">
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-primary/40 rounded-2xl blur-lg opacity-60 animate-pulse"></div>
-                <Avatar className="w-72 h-72 rounded-2xl border-4 border-white/10 shadow-lg overflow-hidden relative z-10">
+              <motion.div 
+                className="relative w-72 h-72"
+                whileHover={{ 
+                  scale: 1.05,
+                  rotateY: 5,
+                  rotateX: 5,
+                }}
+                transition={{ type: "spring", stiffness: 300 }}
+                style={{ transformStyle: 'preserve-3d' }}
+              >
+                <motion.div 
+                  className="absolute -inset-2 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-600 rounded-2xl blur-xl opacity-30"
+                  animate={{ 
+                    rotate: [0, 360],
+                    scale: [1, 1.1, 1]
+                  }}
+                  transition={{ 
+                    duration: 8, 
+                    repeat: Infinity, 
+                    ease: "linear" 
+                  }}
+                />
+                <Avatar className="w-72 h-72 rounded-2xl border-4 border-white/20 shadow-2xl overflow-hidden relative z-10 backdrop-blur-sm">
                   <AvatarImage 
                     src="/lovable-uploads/8923e4dd-cab6-4ad4-a6e8-deda18b26714.png"
                     alt="Tanish S Profile Picture" 
@@ -48,28 +83,36 @@ const About = () => {
                   />
                   <AvatarFallback>TS</AvatarFallback>
                 </Avatar>
-              </div>
+              </motion.div>
             </motion.div>
             
             <motion.div 
-              className="pt-4"
-              initial={{ opacity: 0, x: 20 }}
-              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+              className="pt-4 space-y-6"
+              initial={{ opacity: 0, x: 50 }}
+              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <h3 className="text-2xl font-semibold mb-4">Student & Aspiring Engineer</h3>
-              <p className="text-muted-foreground mb-6">
-                A passionate first-year engineering student with a strong interest in robotics
-                and cybersecurity. Currently exploring the realms of ethical hacking while building
-                a foundation in electronics and programming through hands-on projects.
-              </p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
+                <h3 className="text-2xl font-semibold mb-4 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+                  Student & Aspiring Engineer
+                </h3>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  A passionate first-year engineering student with a strong interest in robotics
+                  and cybersecurity. Currently exploring the realms of ethical hacking while building
+                  a foundation in electronics and programming through hands-on projects.
+                </p>
+              </motion.div>
               
               <div className="space-y-4 mb-8">
                 <InfoItem 
                   icon={<User size={18} />} 
                   title="Name" 
                   value="Tanish.S" 
-                  delay={0.5} 
+                  delay={0.6} 
                   inView={inView} 
                 />
                 
@@ -78,7 +121,7 @@ const About = () => {
                   title="Current Education" 
                   value="First Year - B.E Electronics and Instrumentation" 
                   subvalue="SRM Valliammai Engineering College"
-                  delay={0.6} 
+                  delay={0.7} 
                   inView={inView} 
                 />
                 
@@ -86,7 +129,7 @@ const About = () => {
                   icon={<Code size={18} />} 
                   title="Core Skills" 
                   value="Python, C++, HTML, CSS, Robotics" 
-                  delay={0.7} 
+                  delay={0.8} 
                   inView={inView} 
                 />
                 
@@ -94,19 +137,26 @@ const About = () => {
                   icon={<GraduationCap size={18} />} 
                   title="Current Focus" 
                   value="Ethical Hacking & Cybersecurity" 
-                  delay={0.8} 
+                  delay={0.9} 
                   inView={inView} 
                 />
               </div>
               
-              <AnimatedButton 
-                variant="default" 
-                size="lg" 
-                rounded="full"
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 1.0 }}
               >
-                Get in Touch
-              </AnimatedButton>
+                <AnimatedButton 
+                  variant="default" 
+                  size="lg" 
+                  rounded="full"
+                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
+                  Get in Touch
+                </AnimatedButton>
+              </motion.div>
             </motion.div>
           </div>
         </motion.div>
@@ -132,16 +182,29 @@ const InfoItem = ({
 }) => {
   return (
     <motion.div 
-      className="flex items-center"
-      initial={{ opacity: 0, y: 10 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-      transition={{ duration: 0.5, delay }}
+      className="flex items-center group"
+      initial={{ opacity: 0, x: -20, rotateY: -10 }}
+      animate={inView ? { opacity: 1, x: 0, rotateY: 0 } : { opacity: 0, x: -20, rotateY: -10 }}
+      transition={{ duration: 0.6, delay }}
+      whileHover={{ 
+        scale: 1.05,
+        x: 10,
+        transition: { type: "spring", stiffness: 400 }
+      }}
+      style={{ transformStyle: 'preserve-3d' }}
     >
-      <div className="mr-4 p-2 rounded-full bg-primary/10 text-primary">
+      <motion.div 
+        className="mr-4 p-3 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-500 group-hover:from-blue-500/20 group-hover:to-purple-500/20 transition-all duration-300"
+        whileHover={{ 
+          rotateY: 180,
+          scale: 1.1
+        }}
+        transition={{ type: "spring", stiffness: 300 }}
+      >
         {icon}
-      </div>
+      </motion.div>
       <div>
-        <h4 className="font-medium">{title}</h4>
+        <h4 className="font-medium group-hover:text-blue-500 transition-colors">{title}</h4>
         <p className="text-muted-foreground">{value}</p>
         {subvalue && <p className="text-sm text-muted-foreground">{subvalue}</p>}
       </div>
