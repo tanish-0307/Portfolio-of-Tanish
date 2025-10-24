@@ -141,7 +141,7 @@ const About = () => {
                   Student & Entrepreneur
                 </h3>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
-                  A passionate first-year engineering student building RENSOLV, a renewable energy problem solver focusing on smart grid with AI. Dedicated to creating innovative solutions for sustainable energy management while building a strong foundation in electronics and programming through hands-on projects.
+                  A passionate second-year engineering student building RENSOLV, a renewable energy problem solver focusing on smart grid with AI. With a keen interest in photography, I'm dedicated to creating innovative solutions for sustainable energy management while building a strong foundation in electronics and programming through hands-on projects.
                 </p>
                 <motion.div 
                   className="p-4 rounded-lg bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 border border-green-200/50 dark:border-green-700/50"

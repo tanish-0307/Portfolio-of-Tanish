@@ -14,7 +14,7 @@ const ContactForm = () => {
     setIsSubmitting(true);
     
     try {
-      const mailtoLink = `mailto:tanish030507@gmail.com?subject=Portfolio Contact: ${name}&body=Name: ${name}%0D%0AEmail: ${email}%0D%0AMessage: ${message}`;
+      const mailtoLink = `mailto:Tanish.eie.srmvec@gmail.com?subject=Portfolio Contact: ${name}&body=Name: ${name}%0D%0AEmail: ${email}%0D%0AMessage: ${message}`;
       window.location.href = mailtoLink;
       
       toast({
