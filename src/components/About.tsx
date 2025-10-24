@@ -138,24 +138,24 @@ const About = () => {
                 transition={{ duration: 0.6, delay: 0.5 }}
               >
                 <h3 className="text-2xl font-semibold mb-4 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
-                  Student, Entrepreneur & Cybersecurity Enthusiast
+                  Student & Entrepreneur
                 </h3>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
-                  A passionate first-year engineering student and founder of CYBERDIOXIDE, a startup dedicated to making cybersecurity accessible to everyone. Currently exploring the realms of ethical hacking while building a foundation in electronics and programming through hands-on projects.
+                  A passionate first-year engineering student building RENSOLV, a renewable energy problem solver focusing on smart grid with AI. Dedicated to creating innovative solutions for sustainable energy management while building a strong foundation in electronics and programming through hands-on projects.
                 </p>
                 <motion.div 
-                  className="p-4 rounded-lg bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200/50 dark:border-blue-700/50"
+                  className="p-4 rounded-lg bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 border border-green-200/50 dark:border-green-700/50"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.6, delay: 0.8 }}
-                  whileHover={{ scale: 1.02, boxShadow: "0 10px 30px rgba(59, 130, 246, 0.2)" }}
+                  whileHover={{ scale: 1.02, boxShadow: "0 10px 30px rgba(34, 197, 94, 0.2)" }}
                 >
-                  <h4 className="font-semibold text-blue-600 dark:text-blue-400 mb-2 flex items-center">
+                  <h4 className="font-semibold text-green-600 dark:text-green-400 mb-2 flex items-center">
                     <Building2 size={18} className="mr-2" />
-                    CYBERDIOXIDE
+                    RENSOLV
                   </h4>
                   <p className="text-sm text-muted-foreground">
-                    "Cybersecurity for Everyone" - Our mission is to democratize cybersecurity knowledge and tools, making digital safety accessible to individuals and businesses of all sizes.
+                    A renewable energy problem solver focusing on smart grid with AI - Creating intelligent solutions for sustainable energy management and grid optimization.
                   </p>
                 </motion.div>
               </motion.div>
@@ -181,8 +181,8 @@ const About = () => {
                 <InfoItem 
                   icon={<Building2 size={18} />} 
                   title="Startup" 
-                  value="Founder & CEO at CYBERDIOXIDE" 
-                  subvalue="Cybersecurity for Everyone"
+                  value="Building RENSOLV" 
+                  subvalue="Renewable Energy Smart Grid with AI"
                   delay={0.75} 
                   inView={inView} 
                 />
@@ -198,7 +198,7 @@ const About = () => {
                 <InfoItem 
                   icon={<GraduationCap size={18} />} 
                   title="Current Focus" 
-                  value="Ethical Hacking & Cybersecurity" 
+                  value="Renewable Energy & Smart Grid AI" 
                   delay={0.9} 
                   inView={inView} 
                 />

@@ -47,7 +47,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.9 }}
             className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-12 font-light leading-relaxed max-w-3xl mx-auto"
           >
-            Ethical Hacking Enthusiast & Instrumentation Engineering Student
+            Instrumentation Engineering Student & Entrepreneur
           </motion.p>
           
           <motion.div 
