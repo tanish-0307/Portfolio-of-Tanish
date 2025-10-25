@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import { Button } from './ui/button';
 
@@ -12,49 +13,76 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-background to-background/95"></div>
-      
-      <div className="container mx-auto px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto text-center space-y-8">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-foreground leading-tight">
-            TANISH PORTFOLIO
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground font-light leading-relaxed max-w-3xl mx-auto">
-            Instrumentation Engineering Student & Entrepreneur
-          </p>
-          
-          <div className="flex flex-col sm:flex-row justify-center gap-4 mt-12">
-            <Button 
-              variant="default" 
-              size="lg" 
-              className="rounded-full px-8 py-3 text-base font-medium apple-button"
-              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-background via-secondary/30 to-background">
+      <div className="container mx-auto px-6 lg:px-8 py-20">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <motion.h1 
+              className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground mb-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              View My Work
-            </Button>
+              TANISH PORTFOLIO
+            </motion.h1>
             
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="rounded-full px-8 py-3 text-base font-medium"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            <motion.p 
+              className="text-xl md:text-2xl text-muted-foreground font-light mb-12 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
-              Contact Me
-            </Button>
-          </div>
+              Instrumentation Engineering Student & Entrepreneur
+            </motion.p>
+            
+            <motion.div 
+              className="flex flex-col sm:flex-row justify-center gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <Button 
+                variant="default" 
+                size="lg" 
+                className="rounded-full px-8 py-6 text-base font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                View My Work
+              </Button>
+              
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="rounded-full px-8 py-6 text-base font-medium border-2 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 hover:scale-105"
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Contact Me
+              </Button>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
       
-      <button 
+      <motion.button 
         onClick={scrollToNext}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-sm text-muted-foreground hover:text-foreground transition-all duration-200"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-sm text-muted-foreground hover:text-primary transition-all duration-300"
         aria-label="Scroll down"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 1, ease: [0.22, 1, 0.36, 1] }}
       >
         <span className="mb-2 font-light">Scroll</span>
-        <ArrowDown size={20} className="animate-bounce" />
-      </button>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ArrowDown size={20} />
+        </motion.div>
+      </motion.button>
     </section>
   );
 };

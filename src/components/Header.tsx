@@ -15,18 +15,14 @@ const NavLink = ({ href, children, onClick, isActive }: NavLinkProps) => (
   <a 
     href={href} 
     className={cn(
-      "relative px-3 py-2 text-sm font-medium transition-colors group hover:text-primary",
-      isActive && "text-primary"
+      "relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-full",
+      isActive 
+        ? "text-primary bg-primary/10" 
+        : "text-foreground hover:text-primary hover:bg-primary/5"
     )}
     onClick={onClick}
   >
     <span>{children}</span>
-    <span 
-      className={cn(
-        "absolute bottom-0 left-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full",
-        isActive ? "w-full" : "w-0"
-      )}
-    ></span>
   </a>
 );
 
@@ -74,26 +70,26 @@ const Header = () => {
   return (
     <motion.header 
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 backdrop-blur-xl",
         scrolled ? 
-          "py-3 bg-background/80 border-b" : 
-          "py-5 bg-transparent"
+          "py-3 bg-background/90 border-b border-border/50 shadow-sm" : 
+          "py-4 bg-background/50"
       )}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="container mx-auto flex items-center justify-between px-4">
         <motion.a 
           href="#" 
-          className="text-xl font-semibold tracking-tight"
+          className="text-lg font-semibold tracking-tight"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="flex items-center space-x-2">
             <span className="text-primary">Tanish</span>
-            <span>Portfolio</span>
+            <span className="text-foreground">Portfolio</span>
           </div>
         </motion.a>
 

@@ -1,5 +1,4 @@
-
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
@@ -41,58 +40,44 @@ const Categories = {
   languages: 'Languages',
 };
 
-const SkillBar = ({ skill, index }: { skill: Skill, index: number }) => {
-  const [ref, inView] = useInView({
-    threshold: 0.1,
-    triggerOnce: true
-  });
-
+const SkillBar = ({ skill, index, inView }: { skill: Skill, index: number, inView: boolean }) => {
   return (
-    <div 
-      ref={ref}
-      className="skill-bar opacity-0 translate-y-4 transition-all duration-700 ease-out"
-      style={{ 
-        opacity: inView ? 1 : 0, 
-        transform: inView ? 'translateY(0)' : 'translateY(4px)',
-        transitionDelay: `${index * 100}ms` 
-      }}
+    <motion.div 
+      className="skill-bar"
+      initial={{ opacity: 0, x: -30 }}
+      animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+      transition={{ duration: 0.4, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="flex justify-between mb-1">
-        <span className="font-medium">{skill.name}</span>
+      <div className="flex justify-between mb-2">
+        <span className="font-medium text-foreground">{skill.name}</span>
         {skill.category !== 'languages' && (
           <span className="text-sm text-muted-foreground">{skill.level}%</span>
         )}
       </div>
       
       {skill.category !== 'languages' ? (
-        <div className="h-2 bg-black/5 dark:bg-white/5 rounded-full overflow-hidden backdrop-blur-sm">
+        <div className="h-2 bg-secondary rounded-full overflow-hidden">
           <motion.div 
-            className="h-full bg-gradient-to-r from-primary to-primary/80 rounded-full"
+            className="h-full bg-primary rounded-full"
             initial={{ width: "0%" }}
             animate={inView ? { width: `${skill.level}%` } : { width: "0%" }}
-            transition={{ duration: 1, ease: "easeOut", delay: index * 0.1 }}
+            transition={{ duration: 0.8, delay: index * 0.05 + 0.2, ease: [0.22, 1, 0.36, 1] }}
           />
         </div>
       ) : (
         <div className="text-sm text-muted-foreground italic">Proficient</div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
-const CategoryCard = ({ title, children, delay }: { title: string, children: React.ReactNode, delay: number }) => {
-  const [ref, inView] = useInView({
-    threshold: 0.1,
-    triggerOnce: true
-  });
-
+const CategoryCard = ({ title, children, delay, inView }: { title: string, children: React.ReactNode, delay: number, inView: boolean }) => {
   return (
     <motion.div 
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.6, delay: delay * 0.2 }}
-      className="bg-white/5 backdrop-blur-md rounded-xl p-6 shadow-lg border border-white/10"
+      className="bg-card rounded-2xl p-6 shadow-lg border border-border"
+      initial={{ opacity: 0, y: 30 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{ duration: 0.6, delay: delay * 0.15, ease: [0.22, 1, 0.36, 1] }}
     >
       <h3 className="text-xl font-semibold mb-6 flex items-center">
         <div className="w-2 h-6 bg-primary rounded-full mr-3"></div>
@@ -106,7 +91,6 @@ const CategoryCard = ({ title, children, delay }: { title: string, children: Rea
 };
 
 const Skills = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
   const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: true
@@ -121,40 +105,36 @@ const Skills = () => {
   }, {} as Record<string, Skill[]>);
 
   return (
-    <section id="skills" className="py-24 relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(var(--primary),0.08)_0,rgba(255,255,255,0)_60%)]"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-secondary/30 to-transparent"></div>
-      </div>
-
+    <section id="skills" className="py-24 relative overflow-hidden bg-gradient-to-b from-background to-secondary/30">
       <div className="container mx-auto px-4">
         <motion.div 
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8 }}
           className="max-w-5xl mx-auto mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-2 text-center">Skills & Expertise</h2>
-          <div className="h-1 w-20 bg-primary mx-auto mb-6"></div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">Skills & Expertise</h2>
+          <div className="h-1 w-20 bg-primary mx-auto mb-6 rounded-full"></div>
           <p className="text-center text-muted-foreground max-w-2xl mx-auto">
             My technical skills and proficiency levels across various technologies and tools.
           </p>
         </motion.div>
         
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {(Object.keys(groupedSkills) as Array<keyof typeof Categories>).map((category, catIndex) => (
             <CategoryCard 
               key={category} 
               title={Categories[category]} 
               delay={catIndex}
+              inView={inView}
             >
               {groupedSkills[category].map((skill, skillIndex) => (
                 <SkillBar 
                   key={skill.name} 
                   skill={skill} 
-                  index={skillIndex} 
+                  index={skillIndex}
+                  inView={inView}
                 />
               ))}
             </CategoryCard>
