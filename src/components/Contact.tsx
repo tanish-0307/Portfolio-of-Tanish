@@ -30,18 +30,22 @@ const Contact = () => {
             </p>
           </motion.div>
           
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid md:grid-cols-2 gap-12" style={{ perspective: 1200 }}>
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, x: -50, rotateY: -10 }}
+              animate={inView ? { opacity: 1, x: 0, rotateY: 0 } : { opacity: 0, x: -50, rotateY: -10 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ scale: 1.02, rotateY: 2 }}
+              style={{ transformStyle: "preserve-3d" }}
             >
               <ContactInfo />
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-              transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, x: 50, rotateY: 10 }}
+              animate={inView ? { opacity: 1, x: 0, rotateY: 0 } : { opacity: 0, x: 50, rotateY: 10 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ scale: 1.02, rotateY: -2 }}
+              style={{ transformStyle: "preserve-3d" }}
             >
               <ContactForm />
             </motion.div>

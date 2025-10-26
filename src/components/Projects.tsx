@@ -75,10 +75,11 @@ const ProjectCard = ({ project, index, inView }: { project: Project, index: numb
   return (
     <motion.div 
       className="group rounded-3xl overflow-hidden border border-border bg-card shadow-lg hover:shadow-2xl transition-all duration-500"
-      initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-      animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-      transition={{ duration: 0.6, delay: index * 0.2, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -8, transition: { duration: 0.3 } }}
+      initial={{ opacity: 0, y: 30, rotateX: 10 }}
+      animate={inView ? { opacity: 1, y: 0, rotateX: 0 } : { opacity: 0, y: 30, rotateX: 10 }}
+      transition={{ duration: 0.8, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -10, rotateX: -2, rotateY: 2, scale: 1.02 }}
+      style={{ transformStyle: "preserve-3d" }}
     >
       <div className="aspect-[16/9] overflow-hidden relative">
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />

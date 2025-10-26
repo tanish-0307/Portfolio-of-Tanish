@@ -25,14 +25,20 @@ const About = () => {
             <div className="h-1 w-20 bg-primary mx-auto rounded-full"></div>
           </motion.div>
           
-          <div className="grid md:grid-cols-2 gap-12 items-start">
+          <div className="grid md:grid-cols-2 gap-12 items-start" style={{ perspective: 1200 }}>
             <motion.div 
               className="flex flex-col items-center space-y-6"
-              initial={{ opacity: 0, x: -50 }}
-              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, x: -50, rotateY: -15 }}
+              animate={inView ? { opacity: 1, x: 0, rotateY: 0 } : { opacity: 0, x: -50, rotateY: -15 }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ scale: 1.02, rotateY: 2 }}
+              style={{ transformStyle: "preserve-3d" }}
             >
-              <div className="relative w-72 h-72">
+              <motion.div 
+                className="relative w-72 h-72"
+                whileHover={{ scale: 1.05, rotateZ: 2 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <Avatar className="w-72 h-72 rounded-3xl border-2 border-border shadow-xl overflow-hidden">
                   <AvatarImage 
                     src="/lovable-uploads/8923e4dd-cab6-4ad4-a6e8-deda18b26714.png"
@@ -41,14 +47,15 @@ const About = () => {
                   />
                   <AvatarFallback>TS</AvatarFallback>
                 </Avatar>
-              </div>
+              </motion.div>
             </motion.div>
             
             <motion.div 
               className="pt-4 space-y-6"
-              initial={{ opacity: 0, x: 50 }}
-              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-              transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, x: 50, rotateY: 15 }}
+              animate={inView ? { opacity: 1, x: 0, rotateY: 0 } : { opacity: 0, x: 50, rotateY: 15 }}
+              transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              style={{ transformStyle: "preserve-3d" }}
             >
               <div>
                 <h3 className="text-2xl font-semibold mb-4 text-foreground">
@@ -102,16 +109,19 @@ const About = () => {
                 />
               </div>
               
-              <div>
+              <motion.div
+                whileHover={{ scale: 1.05, rotateX: -3 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <Button 
                   variant="default" 
                   size="lg" 
-                  className="rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  className="rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   Get in Touch
                 </Button>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>

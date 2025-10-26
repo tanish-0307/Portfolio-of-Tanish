@@ -75,9 +75,11 @@ const CategoryCard = ({ title, children, delay, inView }: { title: string, child
   return (
     <motion.div 
       className="bg-card rounded-2xl p-6 shadow-lg border border-border"
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{ duration: 0.6, delay: delay * 0.15, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ opacity: 0, y: 30, rotateX: 15 }}
+      animate={inView ? { opacity: 1, y: 0, rotateX: 0 } : { opacity: 0, y: 30, rotateX: 15 }}
+      transition={{ duration: 0.8, delay: delay * 0.2, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -8, rotateX: -3, scale: 1.02 }}
+      style={{ transformStyle: "preserve-3d" }}
     >
       <h3 className="text-xl font-semibold mb-6 flex items-center">
         <div className="w-2 h-6 bg-primary rounded-full mr-3"></div>

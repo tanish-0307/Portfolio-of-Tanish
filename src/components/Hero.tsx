@@ -13,28 +13,32 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-background via-secondary/30 to-background">
-      <div className="container mx-auto px-6 lg:px-8 py-20">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-background via-secondary/30 to-background pt-20">
+      <div className="container mx-auto px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            style={{ perspective: 1000 }}
           >
             <motion.h1 
               className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground mb-6"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, y: 30, rotateX: 20 }}
+              animate={{ opacity: 1, y: 0, rotateX: 0 }}
+              transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ scale: 1.02, rotateY: 2 }}
+              style={{ transformStyle: "preserve-3d" }}
             >
               TANISH PORTFOLIO
             </motion.h1>
             
             <motion.p 
               className="text-xl md:text-2xl text-muted-foreground font-light mb-12 max-w-2xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, y: 20, z: -50 }}
+              animate={{ opacity: 1, y: 0, z: 0 }}
+              transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              style={{ transformStyle: "preserve-3d" }}
             >
               Instrumentation Engineering Student & Entrepreneur
             </motion.p>
@@ -43,25 +47,40 @@ const Hero = () => {
               className="flex flex-col sm:flex-row justify-center gap-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              style={{ transformStyle: "preserve-3d" }}
             >
-              <Button 
-                variant="default" 
-                size="lg" 
-                className="rounded-full px-8 py-6 text-base font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+              <motion.div
+                whileHover={{ scale: 1.05, rotateX: -5, rotateY: 5 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                style={{ transformStyle: "preserve-3d" }}
               >
-                View My Work
-              </Button>
+                <Button 
+                  variant="default" 
+                  size="lg" 
+                  className="rounded-full px-8 py-6 text-base font-medium shadow-lg hover:shadow-2xl transition-all duration-300"
+                  onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  View My Work
+                </Button>
+              </motion.div>
               
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="rounded-full px-8 py-6 text-base font-medium border-2 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 hover:scale-105"
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              <motion.div
+                whileHover={{ scale: 1.05, rotateX: -5, rotateY: -5 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                style={{ transformStyle: "preserve-3d" }}
               >
-                Contact Me
-              </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="rounded-full px-8 py-6 text-base font-medium border-2 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
+                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  Contact Me
+                </Button>
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>
